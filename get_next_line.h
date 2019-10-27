@@ -6,9 +6,13 @@
 /*   By: fajadron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 15:05:23 by fajadron          #+#    #+#             */
-/*   Updated: 2019/10/27 02:49:09 by fajadron         ###   ########.fr       */
+/*   Updated: 2019/10/27 03:56:12 by fajadron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 8
+#endif
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
@@ -19,8 +23,6 @@
 # include <sys/uio.h>
 # include <unistd.h>
 # include <stdlib.h>
-
-# define BUFFER_SIZE 6
 
 int		get_next_line(int fd, char **line);
 int		ft_check_back(char *buf);

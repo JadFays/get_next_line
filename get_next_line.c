@@ -6,7 +6,7 @@
 /*   By: fajadron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 15:04:50 by fajadron          #+#    #+#             */
-/*   Updated: 2019/10/27 02:46:59 by fajadron         ###   ########.fr       */
+/*   Updated: 2019/10/27 04:45:48 by fajadron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,36 +34,32 @@ char	*ft_create_str(char **ptr_memory, int len)
 int		get_next_line(int fd, char **line)
 {
 	int			ret;
-	int			len;
 	char		*buf;
-	char		*stock_line;
 	static char	*memory = NULL;
 
-	if (!line)
+	if (!line || !fd || BUFFER_SIZE <= 0)
 		return (-1);
 	if (!(buf = (char*)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (-1);
-	while ((ret = read(fd, buf, BUFFER_SIZE)))
+	while ((ret = read(fd, buf, BUFFER_SIZE)) && ret != -1)
 	{
 		buf[ret] = '\0';
 		memory = ft_strjoin(memory, buf);
 		if (ft_check_back(buf))
-			break ;
+			break;
 	}
-	if (memory && ret)
+	if (memory && *memory != '\0')
 	{
 		*line = ft_create_str(&memory, ft_length_char(memory));
 		memory = ft_memory_after_back(memory);
-	//	printf("line = %s\n", *line);
 		return(1);
 	}
 	if (!memory || !*line)
 		return (-1);
-	//printf("line = %s\n", *line);
 	return (0);
 }
 
-/*int		main(void)
+int		main(void)
 {
 	int		fd;
 	char	*str;
@@ -75,20 +71,28 @@ int		get_next_line(int fd, char **line)
 		return (1);
 	}
 	get_next_line(fd, &str);
+	printf("--str = %s--\n", str);
 	get_next_line(fd, &str);
+	printf("--str = %s--\n", str);
 	get_next_line(fd, &str);
+	printf("--str = %s--\n", str);
 	get_next_line(fd, &str);
+	printf("--str = %s--\n", str);
 	get_next_line(fd, &str);
+	printf("--str = %s--\n", str);
 	get_next_line(fd, &str);
+	printf("--str = %s--\n", str);
+	get_next_line(fd, &str);
+	printf("--str = %s--\n", str);
 	printf("return = %d\n", get_next_line(fd, &str));
 	printf("return = %d\n", get_next_line(fd, &str));
 	printf("return = %d\n", get_next_line(fd, &str));
-	printf("return = %d\n", get_next_line(fd, &str));
-	printf("return = %d\n", get_next_line(fd, &str));
+	/*printf("return = %d\n", get_next_line(fd, &str));
+	printf("return = %d\n", get_next_line(fd, &str));*/
 	if (close(fd) == -1)
 	{
 		printf("close error");
 		return (1);
 	}
 	return (0);
-}*/
+}
