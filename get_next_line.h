@@ -6,12 +6,12 @@
 /*   By: fajadron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 15:05:23 by fajadron          #+#    #+#             */
-/*   Updated: 2019/10/29 11:59:46 by fajadron         ###   ########.fr       */
+/*   Updated: 2019/10/29 21:58:30 by fajadron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 8
+# define BUFFER_SIZE 2048
 #endif
 
 #ifndef GET_NEXT_LINE_H
@@ -28,8 +28,7 @@
 int		get_next_line(int fd, char **line);
 int		ft_check_back(char *buf);
 int		ft_length_char(char *buf);
-//char	*ft_memory(char *buf);
-char	*ft_create_str(char *memory, int len);
+void	ft_create_str(char *memory, char **line);
 char	*ft_strjoin(char *memory, char *buf);
 char	*ft_memory_after_back(char *memory);
 

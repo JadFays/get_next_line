@@ -6,7 +6,7 @@
 /*   By: fajadron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 15:05:06 by fajadron          #+#    #+#             */
-/*   Updated: 2019/10/29 16:44:58 by fajadron         ###   ########.fr       */
+/*   Updated: 2019/10/29 23:12:21 by fajadron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,16 @@ char	*ft_memory_after_back(char *memory)
 	i = 0;
 	len = 0;
 	check = 0;
+	/*while (memory[i] != '\n')
+		i++;
+	while (memory[i] != '\0')
+	{
+		i++;
+		len++;
+	}*/
 	while (memory[i + len] != '\0')
 	{
-		if (memory[i - 1] == '\n' && check == 0)
+		if (i > 0 && memory[i - 1] == '\n' && check == 0)
 			check = 1;
 		if (check == 1)
 			len++;
