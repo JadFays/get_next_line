@@ -6,7 +6,7 @@
 /*   By: fajadron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 15:05:06 by fajadron          #+#    #+#             */
-/*   Updated: 2019/10/29 23:12:21 by fajadron         ###   ########.fr       */
+/*   Updated: 2019/10/30 20:56:43 by fajadron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_strjoin(char *memory, char *buf)
 	int		len;
 	char	*str;
 
-	if (!memory && !buf)
+	if (!buf)
 		return (NULL);
 	i = 0;
 	len = 0;
@@ -58,9 +58,12 @@ char	*ft_strjoin(char *memory, char *buf)
 		len++;
 	if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
-	 i = 0;
-	while (memory && *memory != '\0')
-		str[i++] = *memory++;
+	i = 0;
+	len = 0;
+	while (memory && memory[len] != '\0')
+		str[i++] = memory[len++];
+	if (memory)
+		free(memory);
 	while (buf && *buf != '\0')
 		str[i++] = *buf++;
 	str[i] = '\0';
@@ -77,13 +80,12 @@ char	*ft_memory_after_back(char *memory)
 	i = 0;
 	len = 0;
 	check = 0;
-	/*while (memory[i] != '\n')
+	/*while (memory[i] != '\0' && memory[i] != '\n')
 		i++;
-	while (memory[i] != '\0')
-	{
+	if (memory[i] == '\n')
 		i++;
-		len++;
-	}*/
+	while (memory[i + len] != '\0')
+		len++;*/
 	while (memory[i + len] != '\0')
 	{
 		if (i > 0 && memory[i - 1] == '\n' && check == 0)
@@ -96,8 +98,15 @@ char	*ft_memory_after_back(char *memory)
 	if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	len = 0;
-	while (memory[i] != '\0' && memory)
+	while (memory[i] != '\0')
 		str[len++] = memory[i++];
 	str[len] = '\0';
+	free(memory);
 	return (str);
+}
+
+int		ft_free(char *memory)
+{
+	free(memory);
+	return (-1);
 }

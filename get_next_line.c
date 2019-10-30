@@ -6,7 +6,7 @@
 /*   By: fajadron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 15:04:50 by fajadron          #+#    #+#             */
-/*   Updated: 2019/10/29 23:12:24 by fajadron         ###   ########.fr       */
+/*   Updated: 2019/10/30 20:56:41 by fajadron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,24 @@ int		get_next_line(int fd, char **line)
 	{
 		buf[ret] = '\0';
 		if (!(memory[fd] = ft_strjoin(memory[fd], buf)))
-			return (-1);
+			return (ft_free(memory[fd]));
 		if (ft_check_back(buf))
 			break;
 	}
 	if (memory[fd] && *memory[fd] != '\0')
 	{
 		if (!(*line = (char*)malloc(sizeof(char) * (ft_length_char(memory[fd]) + 1))))
-			return (-1);
+			return (ft_free(memory[fd]));
 		ft_create_str(memory[fd], &*line);
-		if (!(memory[fd] = ft_memory_after_back(memory[fd])))
-			return (-1);
+		memory[fd] = ft_memory_after_back(memory[fd]);
+		if (!memory[fd])
+			return (ft_free(memory[fd]));
 		return(1);
 	}
+	if (ret == -1)
+		return (ft_free(memory[fd]));
 	if (!memory[fd])
-		return (-1);
+		free(memory[fd]);
 	*line = NULL;
 	return (0);
 }
@@ -139,7 +142,8 @@ int		main(void)
 	{
 		printf("close error");
 		return (1);
-	}*/	
+	}
+}*/
 	/*fd = open("./file_test_1", O_RDONLY);
 	if (fd == -1)
 	{
