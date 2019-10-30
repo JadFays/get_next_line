@@ -6,7 +6,7 @@
 /*   By: fajadron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 15:05:06 by fajadron          #+#    #+#             */
-/*   Updated: 2019/10/30 20:56:43 by fajadron         ###   ########.fr       */
+/*   Updated: 2019/10/30 22:07:08 by fajadron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,17 @@ int		ft_check_back(char *buf)
 
 int		ft_length_char(char *str)
 {
-	int	lenght = 0;
+	int	length;
 
+	length = 0;
 	while (*str)
 	{
 		if (*str == '\n')
-		{
-			return (lenght);
-		}
-		lenght++;
+			return (length);
+		length++;
 		str++;
 	}
-	return (lenght);
+	return (length);
 }
 
 char	*ft_strjoin(char *memory, char *buf)
@@ -73,28 +72,17 @@ char	*ft_strjoin(char *memory, char *buf)
 char	*ft_memory_after_back(char *memory)
 {
 	int		i;
-	int		check;
 	int		len;
 	char	*str;
 
 	i = 0;
 	len = 0;
-	check = 0;
-	/*while (memory[i] != '\0' && memory[i] != '\n')
+	while (memory[i] != '\0' && memory[i] != '\n')
 		i++;
 	if (memory[i] == '\n')
 		i++;
 	while (memory[i + len] != '\0')
-		len++;*/
-	while (memory[i + len] != '\0')
-	{
-		if (i > 0 && memory[i - 1] == '\n' && check == 0)
-			check = 1;
-		if (check == 1)
-			len++;
-		else
-			i++;
-	}
+		len++;
 	if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	len = 0;
